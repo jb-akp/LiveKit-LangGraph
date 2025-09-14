@@ -8,27 +8,30 @@ from livekit.plugins import (
     deepgram,
     noise_cancellation,
     silero,
+    bey
 )
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 from rag_graph import create_workflow  # <-- our compiled LangGraph app
 
-load_dotenv()
+load_dotenv(".env.local")
 
-class RAGAssistant(Agent):
+class InterviewAgent(Agent):
     def __init__(self) -> None:
         super().__init__(instructions=(
-            "You are a helpful voice RAG assistant. "
-            "Answer questions about the 2024 stock performance PDF. "
-            "If you need to look things up, use the retrieval tool."
+            "You are a professional interviewer conducting a job interview. "
+            "The LangGraph workflow will drive the conversation flow. "
+            "Simply speak the questions and responses as they come from the graph. "
+            "Be conversational, professional, and helpful throughout the interview process."
         ))
 
 async def entrypoint(ctx: agents.JobContext):
     # 1) Build/compile the LangGraph app (Runnable)
+    interview_workflow = create_workflow()
 
     # 2) Wrap it as an LLM for LiveKit via the LangChain plugin
     #    (LLMAdapter knows how to drive LangGraph workflows as an LLM stream)
-    lg_llm = langchain.LLMAdapter(graph=create_workflow())
+    lg_llm = langchain.LLMAdapter(graph=interview_workflow)
 
     # 3) Configure the rest of the realtime pipeline
     session = AgentSession(
@@ -39,16 +42,24 @@ async def entrypoint(ctx: agents.JobContext):
         turn_detection=MultilingualModel(),
     )
 
+    avatar = bey.AvatarSession(
+        avatar_id="694c83e2-8895-4a98-bd16-56332ca3f449",  # ID of the Beyond Presence avatar to use
+    )
+
+    # Start the avatar and wait for it to join
+    await avatar.start(session, room=ctx.room)
+
     await session.start(
         room=ctx.room,
-        agent=RAGAssistant(),
+        agent=InterviewAgent(),
         room_input_options=RoomInputOptions(
             noise_cancellation=noise_cancellation.BVC(),
         ),
     )
 
-    # Optional: greet immediately
-    await session.generate_reply(instructions="Say hello and explain you can answer questions about the 2024 stock PDF.")
+    # Start the interview workflow - the graph will drive the conversation
+    print("Starting interview workflow...")
+    # The graph will automatically begin with the first question
 
 if __name__ == "__main__":
     agents.cli.run_app(agents.WorkerOptions(entrypoint_fnc=entrypoint))

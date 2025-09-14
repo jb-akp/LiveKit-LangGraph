@@ -1146,6 +1146,9 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+bey = [
+    { name = "livekit-plugins-bey" },
+]
 cartesia = [
     { name = "livekit-plugins-cartesia" },
 ]
@@ -1200,6 +1203,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/71/e2/3c1671f7ed50db09813f6f06581b3acc93935f88352f96ce141b93e1f098/livekit_blingfire-1.0.0-cp313-cp313-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3c8d3a92a34925063ac05e70f6d4eebfeb9f9e29816868dece7159688b68cefe", size = 158534, upload-time = "2025-06-30T14:56:23.616Z" },
     { url = "https://files.pythonhosted.org/packages/14/e6/9f21edfdc7284d89e3f6a61db662e5b4eda45a7657628dd55308164386c0/livekit_blingfire-1.0.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:212ffef06b2e832758afcd1d19c709068207ad71f2fb5b426b6bb8e2773e9673", size = 167224, upload-time = "2025-06-30T14:56:24.811Z" },
     { url = "https://files.pythonhosted.org/packages/1f/d0/307cc89438888067a17a0c33329d59867516a616aab7618dcb43987165ea/livekit_blingfire-1.0.0-cp313-cp313-win_amd64.whl", hash = "sha256:f3f4df6a51171a88c6863cea01c607661d6d6bc0398976a37ba0e4b3e3283433", size = 125486, upload-time = "2025-06-30T14:56:26.1Z" },
+]
+
+[[package]]
+name = "livekit-plugins-bey"
+version = "1.2.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "livekit-agents" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/6e/b3/2ed39f19fc3ddf304285125776c6772098773e96a1899e5787a5b5c771a1/livekit_plugins_bey-1.2.8.tar.gz", hash = "sha256:b950d80985f35cbdc980add35faef23ce238237568739ebc6240b0fb9d42e628", size = 5146, upload-time = "2025-09-02T01:07:12.049Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/9d/50/b1d8fc5b74edf94ad438cdfcaf8e8d2c14724205a4155ff47c8bb673b9cc/livekit_plugins_bey-1.2.8-py3-none-any.whl", hash = "sha256:73e879d4add0fe7e587f95f3730b02f59c8adde4450d4723eb3d311c25536463", size = 5224, upload-time = "2025-09-02T01:07:10.904Z" },
 ]
 
 [[package]]
@@ -1321,7 +1336,7 @@ dependencies = [
     { name = "langchain-community" },
     { name = "langchain-core" },
     { name = "langchain-openai" },
-    { name = "livekit-agents", extra = ["cartesia", "deepgram", "openai", "silero", "turn-detector"] },
+    { name = "livekit-agents", extra = ["bey", "cartesia", "deepgram", "openai", "silero", "turn-detector"] },
     { name = "livekit-plugins-langchain" },
     { name = "livekit-plugins-noise-cancellation" },
     { name = "pypdf" },
@@ -1334,7 +1349,7 @@ requires-dist = [
     { name = "langchain-community", specifier = ">=0.3.29" },
     { name = "langchain-core", specifier = ">=0.3.76" },
     { name = "langchain-openai", specifier = ">=0.3.33" },
-    { name = "livekit-agents", extras = ["cartesia", "deepgram", "openai", "silero", "turn-detector"], specifier = "~=1.2" },
+    { name = "livekit-agents", extras = ["bey", "cartesia", "deepgram", "openai", "silero", "turn-detector"], specifier = "~=1.2" },
     { name = "livekit-plugins-langchain", specifier = "~=1.1" },
     { name = "livekit-plugins-noise-cancellation", specifier = "~=0.2" },
     { name = "pypdf", specifier = ">=6.0.0" },
