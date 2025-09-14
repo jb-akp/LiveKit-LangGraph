@@ -19,9 +19,9 @@ def create_workflow():
     llm = ChatOpenAI(model="gpt-4o", temperature=0.7)
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
 
-    pdf_path = "/Users/jimmybradford/Downloads/TechCompanyInfo.pdf"
+    pdf_path = os.getenv("COMPANY_PDF_PATH", "./TechCompanyInfo.pdf")
     if not os.path.exists(pdf_path):
-        raise FileNotFoundError(f"PDF file not found: {pdf_path}")
+        raise FileNotFoundError(f"PDF file not found: {pdf_path}. Please set COMPANY_PDF_PATH environment variable or place TechCompanyInfo.pdf in the current directory.")
 
     pages = PyPDFLoader(pdf_path).load()
 
