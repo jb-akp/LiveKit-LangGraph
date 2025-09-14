@@ -1,4 +1,4 @@
-# rag_graph.py
+# graph.py
 from dotenv import load_dotenv
 import os
 from typing import TypedDict, Annotated, Sequence

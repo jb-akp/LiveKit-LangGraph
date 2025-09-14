@@ -12,7 +12,7 @@ from livekit.plugins import (
 )
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
-from rag_graph import create_workflow  # <-- our compiled LangGraph app
+from graph import create_workflow  # <-- our compiled LangGraph app
 
 load_dotenv(".env.local")
 
